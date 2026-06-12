@@ -1,3 +1,55 @@
+// 佈景主題管理
+class ThemeManager {
+    constructor() {
+        this.themeToggle = document.getElementById('themeToggle');
+        this.init();
+    }
+
+    init() {
+        this.loadTheme();
+        this.themeToggle.addEventListener('change', () => this.toggleTheme());
+    }
+
+    toggleTheme() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+            this.setLightMode();
+        } else {
+            this.setDarkMode();
+        }
+    }
+
+    setDarkMode() {
+        document.body.classList.add('dark-mode');
+        this.themeToggle.checked = true;
+        this.updateToggleIcon('☀️');
+        localStorage.setItem('theme', 'dark');
+    }
+
+    setLightMode() {
+        document.body.classList.remove('dark-mode');
+        this.themeToggle.checked = false;
+        this.updateToggleIcon('🌙');
+        localStorage.setItem('theme', 'light');
+    }
+
+    updateToggleIcon(icon) {
+        const toggleIcon = document.querySelector('.toggle-icon');
+        if (toggleIcon) {
+            toggleIcon.textContent = icon;
+        }
+    }
+
+    loadTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            this.setDarkMode();
+        } else {
+            this.setLightMode();
+        }
+    }
+}
+
 // 初始化應用
 class BloodPressureApp {
     constructor() {
@@ -138,6 +190,8 @@ class BloodPressureApp {
 
 // 應用啟動
 let app;
+let themeManager;
 document.addEventListener('DOMContentLoaded', () => {
+    themeManager = new ThemeManager();
     app = new BloodPressureApp();
 });

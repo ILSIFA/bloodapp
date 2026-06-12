@@ -1,3 +1,41 @@
+:root {
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-tertiary: #999;
+    --card-bg: white;
+    --card-border: #e0e0e0;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --input-bg: white;
+    --button-primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --button-reset-bg: #f0f0f0;
+    --button-reset-text: #666;
+    --button-reset-hover: #e0e0e0;
+    --record-bg: #f9f9f9;
+    --header-text: white;
+    --success-bg: #4caf50;
+    --empty-text: #999;
+}
+
+body.dark-mode {
+    --bg-gradient-start: #1a1a2e;
+    --bg-gradient-end: #16213e;
+    --text-primary: #e4e4e7;
+    --text-secondary: #b4b4b8;
+    --text-tertiary: #71717a;
+    --card-bg: #2a2a3e;
+    --card-border: #404050;
+    --card-shadow: rgba(0, 0, 0, 0.5);
+    --input-bg: #3a3a4e;
+    --button-reset-bg: #3a3a4e;
+    --button-reset-text: #b4b4b8;
+    --button-reset-hover: #4a4a5e;
+    --record-bg: #363649;
+    --header-text: #f0f0f0;
+    --empty-text: #71717a;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +44,10 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     min-height: 100vh;
     padding: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -18,7 +57,7 @@ body {
 
 .header {
     text-align: center;
-    color: white;
+    color: var(--header-text);
     margin-bottom: 30px;
 }
 
@@ -41,14 +80,15 @@ body {
 }
 
 .card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px var(--card-shadow);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-section h2 {
-    color: #333;
+    color: var(--text-primary);
     margin-bottom: 20px;
     font-size: 1.5em;
     border-bottom: 3px solid #667eea;
@@ -62,7 +102,7 @@ body {
 label {
     display: block;
     margin-bottom: 8px;
-    color: #555;
+    color: var(--text-secondary);
     font-weight: 600;
     font-size: 0.95em;
 }
@@ -73,11 +113,13 @@ select,
 textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--card-border);
     border-radius: 8px;
     font-size: 1em;
     font-family: inherit;
-    transition: border-color 0.3s;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
 }
 
 input[type="text"]:focus,
@@ -118,7 +160,7 @@ button {
 }
 
 .btn-submit {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--button-primary-bg);
     color: white;
 }
 
@@ -128,16 +170,16 @@ button {
 }
 
 .btn-reset {
-    background: #f0f0f0;
-    color: #666;
+    background: var(--button-reset-bg);
+    color: var(--button-reset-text);
 }
 
 .btn-reset:hover {
-    background: #e0e0e0;
+    background: var(--button-reset-hover);
 }
 
 .list-section h2 {
-    color: #333;
+    color: var(--text-primary);
     margin-bottom: 20px;
     font-size: 1.5em;
     border-bottom: 3px solid #667eea;
@@ -150,8 +192,8 @@ button {
 }
 
 .record-item {
-    background: #f9f9f9;
-    border: 2px solid #e0e0e0;
+    background: var(--record-bg);
+    border: 2px solid var(--card-border);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 12px;
@@ -172,7 +214,7 @@ button {
 
 .record-time {
     font-size: 0.85em;
-    color: #999;
+    color: var(--text-tertiary);
     font-weight: 600;
 }
 
@@ -192,11 +234,15 @@ button {
 }
 
 .record-detail {
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .record-detail strong {
-    color: #333;
+    color: var(--text-primary);
+}
+
+body.dark-mode .record-detail strong {
+    color: var(--text-primary);
 }
 
 .record-medication {
@@ -223,34 +269,33 @@ button {
     color: #c2185b;
 }
 
+body.dark-mode .medication-none {
+    background: #1b5e20;
+    color: #a5d6a7;
+}
+
+body.dark-mode .medication-yes {
+    background: #e65100;
+    color: #ffe0b2;
+}
+
+body.dark-mode .medication-no {
+    background: #880e4f;
+    color: #f48fb1;
+}
+
 .record-notes {
     margin-top: 10px;
     padding-top: 10px;
-    border-top: 1px solid #e0e0e0;
-    color: #666;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-secondary);
     font-style: italic;
     font-size: 0.9em;
 }
 
-.delete-btn {
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    font-size: 0.8em;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.delete-btn:hover {
-    background: #ff5252;
-    transform: scale(1.05);
-}
-
 .empty-message {
     text-align: center;
-    color: #999;
+    color: var(--empty-text);
     padding: 30px;
     font-size: 1.1em;
 }
@@ -292,6 +337,57 @@ button {
     margin-bottom: 15px;
     display: none;
     animation: slideIn 0.3s ease-in;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.toggle-label:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.delete-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.delete-btn:hover {
+    background: #ff5252;
+    transform: scale(1.05);
 }
 
 @keyframes slideIn {
